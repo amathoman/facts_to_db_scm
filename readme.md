@@ -6,7 +6,7 @@ Currently an example on how to upload gathered facts from Windows hosts to a dat
 
 Database Variables
 
-   You will need to pass these in as extra vars, or specify them in the fact_to_db.yml playbook
+   You will need to pass these in as extra vars, or specify them in the fact_to_db.yml playbook.  Change the values to suit...
 
       instance_address: serverreporting.cferhetrt.ap-southeast-2.rds.amazonaws.com
       database_name: reporting
@@ -19,7 +19,8 @@ Database Variables
       pg_pass: P@ssword123
 
 #########################################################
-    Ansible Tower (Extra Credential Config)
+
+Ansible Tower (Extra Credential Config)
 
     input configuration:
       fields:
