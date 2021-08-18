@@ -1,17 +1,12 @@
 ---
   - name: Gather Server Facts
     hosts: all
-    gather_facts: false
+    gather_facts: true
 
-    vars:
-      # ansible_user: "{{ admin_user }}"
-      # ansible_password: "{{ admin_pass }}"
+
      
     tasks:
 
-      # - name: Gather Server Facts (Module)
-      #   setup:
-      #   register: server_facts
       
       - name: Ensure Fact File Directory Exists
         file:
@@ -31,7 +26,7 @@
 
 # Play 2
 
-  - name: Gather Server Facts
+  - name: Upload to Facts to Database
     hosts: localhost
     connection: local
     gather_facts: false
