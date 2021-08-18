@@ -14,7 +14,7 @@
       #   register: server_facts
       
       - name: Ensure Fact File Directory Exists
-        ansible.builtin.file:
+        file:
           path: "{{ playbook_dir +'/factfiles' }}"
           state: directory
         delegate_to: localhost
@@ -29,27 +29,27 @@
 
 
 
-
-      # - name: create server fact file
-      #   copy:
-      #     content: "{{ server_facts }}"
-      #     dest: "{{ playbook_dir +'/factfiles/' + ansible_hostname +'.json'   }}"
-      #   delegate_to: localhost
-
 # Play 2
 
   - name: Gather Server Facts
     hosts: localhost
+    connection: local
     gather_facts: false
   
     vars:
+      instance_address: ""
+      database_name: ""
+      pg_port: ""
+      fact_table_name: ""
+
 
     tasks:
 
 
       - name: Run Database Facts Import
-        command: "python3 facts2db.py ./factfiles windowsserverfacts serverreporting.crpqo3fedhw7.ap-southeast-2.rds.amazonaws.com reporting {{ pg_user }} {{ pg_pass }} 5432"
+        command: "python3 facts2db.py ./factfiles {{ fact_table_name }} {{ instance_address }} {{ database_name }} {{ pg_user }} {{ pg_pass }} {{ pg_port }}"
         ignore_errors: true
 
 
 
+     
