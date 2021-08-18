@@ -1,6 +1,5 @@
-Currently an example on how to upload gathered facts from Windows hosts to a database
+Currently an example on how to upload gathered facts from Windows hosts to a database (*SQL)
 
-###### Example Variables ##########
 
 #########################################################
 
