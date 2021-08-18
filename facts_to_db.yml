@@ -1,0 +1,55 @@
+---
+  - name: Gather Server Facts
+    hosts: all
+    gather_facts: false
+
+    vars:
+      ansible_user: "{{ admin_user }}"
+      ansible_password: "{{ admin_pass }}"
+     
+    tasks:
+
+      # - name: Gather Server Facts (Module)
+      #   setup:
+      #   register: server_facts
+      
+      - name: Ensure Fact File Directory Exists
+        ansible.builtin.file:
+          path: "{{ playbook_dir +'/factfiles' }}"
+          state: directory
+        delegate_to: localhost
+        run_once: true
+      
+       
+      - name: Create Server Fact Files
+        template:
+          src: server_facts.json.j2
+          dest: "{{ playbook_dir +'/factfiles/' + ansible_hostname +'.json'   }}"
+        delegate_to: localhost
+
+
+
+
+      # - name: create server fact file
+      #   copy:
+      #     content: "{{ server_facts }}"
+      #     dest: "{{ playbook_dir +'/factfiles/' + ansible_hostname +'.json'   }}"
+      #   delegate_to: localhost
+
+# Play 2
+
+  - name: Gather Server Facts
+    hosts: localhost
+    gather_facts: false
+  
+    vars:
+
+    tasks:
+
+
+      - name: Run Database Facts Import
+        command: "python3 facts2db.py ./factfiles windowsserverfacts serverreporting.crpqo3fedhw7.ap-southeast-2.rds.amazonaws.com reporting {{ pg_user }} {{ pg_pass }} 5432"
+        ignore_errors: true
+
+
+
