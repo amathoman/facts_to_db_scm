@@ -15,7 +15,7 @@
       - name: Ensure Fact file are in place
         win_copy:
           src: templates/app_facts.ps1
-          dest: c:\temp\facts
+          dest: c:\temp\facts\app_facts.ps1
 
 
       - name: Gather Facts
