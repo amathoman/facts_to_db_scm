@@ -8,7 +8,7 @@
     tasks:
 
       - name: Ensure Fact File Directory Exists
-        ansible.windows.win_file:
+        win_file:
           path: C:\Temp\facts
           state: directory
 
