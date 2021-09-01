@@ -1,11 +1,32 @@
 ---
   - name: Gather Server Facts
     hosts: all
-    gather_facts: true
+    gather_facts: false
 
 
      
     tasks:
+
+      - name: Ensure Fact File Directory Exists
+        ansible.windows.win_file:
+          path: C:\Temp\facts
+          state: directory
+
+      - name: Ensure Fact file are in place
+        win_copy:
+          src: templates/app_facts.ps1
+          dest: c:\temp\facts
+
+
+      - name: Gather Facts
+        setup:
+          fact_path: C:\temp\facts
+        register: win_facts
+
+      - name: Show All facts
+        debug:
+          var: win_facts
+
 
       
       - name: Ensure Fact File Directory Exists
